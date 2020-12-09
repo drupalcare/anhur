@@ -1,6 +1,6 @@
 /**
  * @file
- * This file is to add any custom js for the drupal8 w3css subtheme.
+ * This file is to add any custom js for anhur theme.
  */
 
 (function ($, Drupal) {
