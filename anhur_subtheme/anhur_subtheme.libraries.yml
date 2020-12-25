@@ -1,0 +1,10 @@
+anhur-subtheme-global:
+  version: VERSION
+  css:
+    theme:
+      css/anhur-subtheme-style.css: {}
+
+  js:
+    js/anhur-subtheme-script.js: {}
+  dependencies:
+  - anhur/anhur-theme-global
