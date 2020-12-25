@@ -80,13 +80,6 @@ a,
 }
 
 /* Top Sticky Menu */
-#main-navigation-inner-h #block-amun-account-menu {
-  float: right !important;
-}
-
-#main-navigation-inner-h #block-amun-main-menu {
-  float: left !important;
-}
 
 #main-navigation-inner-h .ul-parent-account li {
   float: left;
@@ -203,7 +196,7 @@ a,
 }
 
 /* Header */
-#block-anhur-branding {
+.block-system-branding-block {
   margin: 0 auto;
   float: none;
   text-align: center;

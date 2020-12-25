@@ -6,7 +6,7 @@ description: 'Egyptian Gods - Anhur - Sky God and God of war. His name meant (sk
 core: '8.x'
 
 libraries:
-  - anhur/global-components
+  - anhur/anhur-theme-global
   - anhur/default-color
 
 #Regions

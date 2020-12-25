@@ -7,7 +7,7 @@
 
   'use strict';
 
-  Drupal.behaviors.customBehavior = {
+  Drupal.behaviors.anhurThemeBehavior = {
     attach: function (context, settings) {
 
      $(context)
