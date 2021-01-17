@@ -1,8 +1,19 @@
+anhur-google-font-external:
+  Version: VERSION
+  css:
+    base:
+      'https://fonts.googleapis.com/css?family=Source Sans Pro:200,300,400':  { type: external, minified: true }
+
+anhur-google-font-local:
+  Version: VERSION
+  css:
+    base:
+      css/font/google-font.css: {}
+
 anhur-theme-global:
   version: VERSION
   css:
     theme:
-      'https://fonts.googleapis.com/css?family=Source Sans Pro:200,300,400':  { type: external, minified: true }
       css/anhur-style.css: {}
   js:
     js/anhur-script.js: {}
