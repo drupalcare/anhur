@@ -131,7 +131,7 @@ a,
 }
 
 #header {
-  z-index: 9998;
+  z-index: 97;
 }
 
 .w3-sticky {
@@ -209,7 +209,7 @@ a,
 }
 
 #main-navigation-v {
-  z-index: 10000;
+  z-index: 99;
 }
 
 .wrapper.w3-content #main-navigation-v {
