@@ -1,4 +1,4 @@
-name: Anhur
+name: Anhur V2
 type: theme
 base theme: drupal8_w3css_theme
 core_version_requirement: ^8 || ^9 || ^10
@@ -6,9 +6,7 @@ description: 'Egyptian Gods - Anhur - Sky God and God of war. His name meant (sk
 core: '8.x'
 
 libraries:
-  - anhur/anhur-google-font-external
   - anhur/anhur-theme-global
-  - anhur/default-color
 
 #Regions
 regions:
