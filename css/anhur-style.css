@@ -115,7 +115,7 @@
 }
 
 #search-slide .w3-search-block-form .form-type-search:before {
-  top: 24px;
+  top: 31px;
 }
 
 #search-slide .search-slide-inner {
@@ -145,17 +145,24 @@
 
 #search-slide .close-search {
   position: absolute;
-  display: block;
+  display: flex;
   text-align: center;
   top: 38px;
   right: 16px;
+  padding: 10px 9px;
+  justify-content: center;
+  justify-items: center;
 }
 
 #header-inner #open-search {
   float: right;
-  width: 50px;
-  text-align: center;
-  line-height: 46px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 #header-inner #open-nav-inner {
@@ -221,6 +228,7 @@
 
   #search-slide .close-search {
     top: 40px;
+    padding: 8px 9px;
   }
 
 }
