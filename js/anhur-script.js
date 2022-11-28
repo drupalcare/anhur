@@ -2,40 +2,20 @@
  * @file
  * This file is to add any custom js for anhur theme.
  */
-
-(function ($, Drupal) {
-
+(function ($, Drupal, once) {
   'use strict';
-
   Drupal.behaviors.anhurThemeBehavior = {
     attach: function (context, settings) {
-
-     $(context)
-            .find('.close-search')
-            .once('.close-search')
-      .on(
-          'click', function () {
-                  document.getElementById('search-slide').style.display = 'none';
-                }
-            );
-      $(context)
-            .find('.open-search')
-            .once('.open-search')
-             .on(
-                'click', function () {
-                  document.getElementById('search-slide').style.display = 'block';
-                  document.getElementById('main-navigation-v').style.display = 'none';
-                }
-            );
-      $(context)
-            .find('.open-nav-inner')
-            .once('.open-nav-inner')
-            .on(
-                'click', function () {
-                  document.getElementById('search-slide').style.display = 'none';
-                }
-            );
-
+      $(once('body', '.close-search', context)).on('click', function () {
+        document.getElementById('search-slide').style.display = 'none';
+      });
+      $(once('body', '.open-search', context)).on('click', function () {
+        document.getElementById('search-slide').style.display = 'block';
+        document.getElementById('main-navigation-v').style.display = 'none';
+      });
+      $(once('body', '.open-nav-inner', context)).on('click', function () {
+        document.getElementById('search-slide').style.display = 'none';
+      });
     }
   };
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);
