@@ -2,20 +2,41 @@
  * @file
  * This file is to add any custom js for anhur theme.
  */
-(function ($, Drupal, once) {
+((Drupal, once) => {
   'use strict';
   Drupal.behaviors.anhurThemeBehavior = {
     attach: function (context, settings) {
-      $(once('body', '.close-search', context)).on('click', function () {
-        document.getElementById('search-slide').style.display = 'none';
-      });
-      $(once('body', '.open-search', context)).on('click', function () {
-        document.getElementById('search-slide').style.display = 'block';
+
+      const searchBlock = document.getElementById('search-slide');
+      const openNav = document.querySelector('.open-nav-inner');
+      const openSearch = document.querySelector('.open-search');
+      const closeSearch = document.querySelector('.close-search');
+
+      const closeSearchHandler = () => {
+        searchBlock.style.height = "0px";
+        searchBlock.addEventListener('transitionend', removeActiveClass, {once: true});
+      }
+
+      const removeActiveClass = () => {
+        searchBlock.classList.remove('show');
+      }
+
+      const openSearchHandler = () => {
         document.getElementById('main-navigation-v').style.display = 'none';
-      });
-      $(once('body', '.open-nav-inner', context)).on('click', function () {
-        document.getElementById('search-slide').style.display = 'none';
-      });
+        searchBlock.classList.add('show');
+        searchBlock.style.height = "auto";
+        let height = searchBlock.clientHeight + "px";
+        searchBlock.style.height = "0px";
+        setTimeout(() => {
+          searchBlock.style.height = height;
+        }, 0);
+      }
+
+      closeSearch?.addEventListener('click', closeSearchHandler);
+      openSearch?.addEventListener('click', openSearchHandler);
+      openNav?.addEventListener('click', closeSearchHandler);
+
     }
   };
-})(jQuery, Drupal, once);
+
+})(Drupal, once);

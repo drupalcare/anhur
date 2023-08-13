@@ -62,7 +62,6 @@
   animation: opac 0.8s;
 }
 
-.search-slide-wrapper,
 .w3-animate-top {
   position: relative;
   animation: animatetop 0.5s;
@@ -90,7 +89,7 @@
 .search-slide-wrapper {
   width: 100%;
   z-index: 9999;
-  display: none;
+  height: 0;
   position: fixed;
   top: 0;
   left: 0;
@@ -154,9 +153,9 @@
   justify-items: center;
 }
 
+#header-inner #open-nav-inner,
 #header-inner #open-search {
-  float: right;
-  margin: 0;
+  margin: 0 0 -0.01em 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,12 +164,12 @@
   min-height: 50px;
 }
 
+#header-inner #open-search {
+  float: right;
+}
+
 #header-inner #open-nav-inner {
-  margin: 0;
   float: left;
-  text-align: center;
-  line-height: 46px;
-  width: 50px;
 }
 
 /* Header */
