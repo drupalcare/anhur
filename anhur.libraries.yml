@@ -1,5 +1,4 @@
 anhur-theme-global:
-  version: VERSION
   css:
     theme:
       css/anhur-style.css: {}
