@@ -5,5 +5,8 @@ anhur-subtheme-global:
 
   js:
     js/anhur-subtheme-script.js: {}
+
   dependencies:
-  - anhur/anhur-theme-global
+    - core/drupal
+    - core/once
+    - anhur/anhur-theme-global

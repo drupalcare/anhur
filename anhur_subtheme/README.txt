@@ -1,1 +1,1 @@
-Anhur Sub-thme is a start up theme for your customization.
+Anhur Sub-theme is a start up theme for your customization.
