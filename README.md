@@ -15,7 +15,7 @@ On narrow screens the menu is hidden and a button in the header opens it.
 1. Install W3CSS Theme 3.0 (for example `composer require drupal/d8w3css`).
 2. Install Anhur into `themes/contrib`, for example
    `composer require drupal/anhur`.
-3. Go to Appearance (`/admin/appearance`) and scroll to "Anhur V2".
+3. Go to Appearance (`/admin/appearance`) and scroll to "Anhur".
 4. Click "Install and set as default".
 
 With Drush: `drush theme:enable drupal8_w3css_theme anhur`, then
