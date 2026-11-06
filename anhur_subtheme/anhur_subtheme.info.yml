@@ -2,7 +2,7 @@ name: Anhur Sub-theme
 type: theme
 base theme: anhur
 core_version_requirement: ^11.3 || ^12
-description: 'Anhur sub-theme is an empty theme for your customization.'
+description: 'Provides an empty starter sub-theme of Anhur for your own customizations.'
 libraries:
   - anhur_subtheme/anhur-subtheme-global
 

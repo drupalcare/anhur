@@ -3,7 +3,7 @@ package: W3CSS
 type: theme
 base theme: drupal8_w3css_theme
 core_version_requirement: ^11.3 || ^12
-description: 'Provides a W3CSS Theme sub-theme with a fixed menu column: on wide screens the main menu stays visible at the left of the page, and on phones a header button opens it as a side panel. <a href="https://www.anhur.flashwebcenter.com">Demo site</a>'
+description: 'Provides a W3CSS Theme sub-theme with a fixed menu column on wide screens and a side-panel menu on phones.'
 libraries:
   - anhur/anhur-theme-global
 
