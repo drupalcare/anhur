@@ -1,8 +1,13 @@
 # Anhur
 
-Anhur is a sub-theme of W3CSS Theme (machine name `drupal8_w3css_theme`). On wide
-screens it keeps the main menu visible in a fixed column at the left of the page.
-On narrow screens the menu is hidden and a button in the header opens it.
+Anhur is a sub-theme of W3CSS Theme (machine name `drupal8_w3css_theme`). On
+wide screens it keeps the main menu visible in a fixed column at the left of the
+page. On narrow screens the menu is hidden and a button in the header opens it.
+
+- Project page: [drupal.org/project/anhur](https://www.drupal.org/project/anhur)
+- Issue queue:
+  [drupal.org/project/issues/anhur](https://www.drupal.org/project/issues/anhur)
+
 
 ## Requirements
 
@@ -10,13 +15,14 @@ On narrow screens the menu is hidden and a button in the header opens it.
 - W3CSS Theme 3.0. Install it first. Anhur does not work without it, and it is
   the release that Anhur's class names and settings follow.
 
-## Installing
+
+## Installation
 
 1. Install W3CSS Theme 3.0 (for example `composer require drupal/d8w3css`).
-2. Install Anhur into `themes/contrib`, for example
+1. Install Anhur into `themes/contrib`, for example
    `composer require drupal/anhur`.
-3. Go to Appearance (`/admin/appearance`) and scroll to "Anhur".
-4. Click "Install and set as default".
+1. Go to Appearance (`/admin/appearance`) and scroll to "Anhur".
+1. Click "Install and set as default".
 
 With Drush: `drush theme:enable drupal8_w3css_theme anhur`, then
 `drush config:set system.theme default anhur -y`, then `drush cr`.
@@ -26,16 +32,17 @@ menu, search, branding, footer menu and the page blocks). Check them at
 `/admin/structure/block` for the Anhur theme and move any that clash with blocks
 you already have.
 
+
 ## What is different from W3CSS Theme
 
-Anhur changes the page layout, the header and the menu. The content regions
-come from the base theme.
+Anhur changes the page layout, the header and the menu. The content regions come
+from the base theme.
 
 - **Fixed menu column on wide screens.** The main menu and the account menu are
-  placed in the "Primary Menu Vertical" region. From 993 pixels wide and up, they
-  show in a column 250 pixels wide at the left, and the page content sits to the
-  right of it. The menu open and close buttons are hidden, because the menu is
-  always visible. The whole layout is at most 1600 pixels wide.
+  placed in the "Primary Menu Vertical" region. From 993 pixels wide and up,
+  they show in a column 250 pixels wide at the left, and the page content sits
+  to the right of it. The menu open and close buttons are hidden, because the
+  menu is always visible. The whole layout is at most 1600 pixels wide.
 - **Hidden menu on narrow screens.** Below 993 pixels, the column is hidden. A
   menu button at the left of the header opens it as a side panel. The header
   sticks to the top of the window.
@@ -60,7 +67,8 @@ come from the base theme.
 
 The regions are the base theme's 22, plus "Fixed Search Bar" (23 in total).
 
-## Settings
+
+## Configuration
 
 Anhur has no settings of its own. It uses the settings form of W3CSS Theme: go
 to `/admin/appearance/settings/anhur` to set the website width, color scheme and
@@ -71,19 +79,21 @@ Reserved". Social links are empty and turned off, and the credit link is off.
 The fixed column takes 250 pixels from the page width. Long menu labels, deep
 menus and a narrow website width setting leave less room for content.
 
+
 ## Checking that it works
 
 1. Open the front page in a window wider than 993 pixels. The main menu shows in
    a column at the left, and the page content is to its right. There is no menu
    open button.
-2. Click the search button in the header. The search panel slides down from the
+1. Click the search button in the header. The search panel slides down from the
    top and the cursor is in the search field. Press Escape. The panel closes.
-3. Make the window narrower than 993 pixels, or use a phone. The column is
-   gone and a menu button shows at the left of the header.
-4. Click the menu button. The menu opens as a panel. Close it with its close
+1. Make the window narrower than 993 pixels, or use a phone. The column is gone
+   and a menu button shows at the left of the header.
+1. Click the menu button. The menu opens as a panel. Close it with its close
    button.
-5. Scroll down on the narrow window. The header stays at the top.
-6. Press the Tab key. A visible outline moves with the focus.
+1. Scroll down on the narrow window. The header stays at the top.
+1. Press the Tab key. A visible outline moves with the focus.
+
 
 ## Custom CSS and JavaScript
 
@@ -94,14 +104,15 @@ names must be renamed. The base theme ships a script for it and a table of old
 and new names: `docs/CLASS-MIGRATION.md` in the W3CSS Theme folder.
 
 Put your own CSS, JavaScript and templates in a sub-theme of Anhur. The folder
-`anhur_subtheme` in this package is an empty starter. Copy it to `themes/custom`,
-and rename the folder, its files, the library name inside them and the name in
-the `.info.yml` file before you enable it.
+`anhur_subtheme` in this package is an empty starter. Copy it to
+`themes/custom`, and rename the folder, its files, the library name inside them
+and the name in the `.info.yml` file before you enable it.
+
 
 ## Helpful links
 
-- W3CSS Theme: https://www.drupal.org/project/d8w3css
-- Documentation: https://www.drupal.org/node/2866181
-- Color schemes: https://www.w3css.flashwebcenter.com/w3css-predefined-color-themes
-- Anhur demo: https://www.anhur.flashwebcenter.com/
-- Issue queue: https://www.drupal.org/project/issues/anhur
+- [W3CSS Theme project page](https://www.drupal.org/project/d8w3css)
+- [W3CSS Theme documentation](https://www.drupal.org/node/2866181)
+- [Predefined color themes](https://www.w3css.flashwebcenter.com/w3css-predefined-color-themes)
+- [Anhur demo site](https://www.anhur.flashwebcenter.com/)
+- [Anhur issue queue](https://www.drupal.org/project/issues/anhur)
