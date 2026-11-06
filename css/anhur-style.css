@@ -1,17 +1,17 @@
 /*
  * anhur chrome and layout: fixed left sidebar at 993px and up, collapsing
- * below. Colour fixes follow planning/subthemes-a11y-audit.md (the schemes in
+ * below. Color fixes follow planning/subthemes-a11y-audit.md (the schemes in
  * D8W3CSS stay untouched; the fixes live here).
  */
 :root {
   --anhur-sidebar-width: 250px;
   --anhur-control-size: 50px;
-  --anhur-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  --anhur-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0, 0, 0, 0.12);
 }
 
-/* Colour values: made for anhur's own scheme, so they apply only while that
+/* Color values: made for anhur's own scheme, so they apply only while that
    scheme is active. D8W3CSS names the active scheme in a body class; with any
-   other scheme, that scheme's own colours are left untouched. */
+   other scheme, that scheme's own colors are left untouched. */
 .w3css-scheme-w3-theme-00014 {
   --anhur-heading: #2e6f9f;
   --anhur-focus-border: #2e6f9f;
@@ -57,22 +57,22 @@
 
 .anhur-layout :is(.w3css-main-nav__open, .open-search) {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 10px;
   min-inline-size: var(--anhur-control-size);
   min-block-size: var(--anhur-control-size);
 }
 
 .anhur-layout .w3css-main-nav__open {
-  grid-column: 1;
   grid-row: 1;
+  grid-column: 1;
   justify-self: start;
 }
 
 .anhur-layout .open-search {
-  grid-column: 3;
   grid-row: 1;
+  grid-column: 3;
   justify-self: end;
 }
 
@@ -80,7 +80,8 @@
   box-shadow: var(--anhur-shadow);
 }
 
-/* Focus: base.css removes the outline on links, buttons and fields. */
+/* Keyboard focus: the same ring as the base theme (base.css), kept here so
+   the sub-theme does not depend on the base theme version. */
 :where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 2px;
@@ -91,20 +92,12 @@
   border-color: var(--anhur-focus-border);
 }
 
-/* One accessible heading colour in the page regions (header headings inherit). */
-.w3css-scheme-w3-theme-00014 :is(
-  .w3css-welcome-text__inner,
-  .w3css-highlighted__inner,
-  .w3css-top-region__inner,
-  .w3css-page-title__inner,
-  .w3css-main-region__inner,
-  .w3css-bottom-region__inner,
-  .w3css-footer-region__inner
-) :is(h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a) {
+/* One accessible heading color in the page regions (header headings inherit). */
+.w3css-scheme-w3-theme-00014 :is(.w3css-welcome-text__inner, .w3css-highlighted__inner, .w3css-top-region__inner, .w3css-page-title__inner, .w3css-main-region__inner, .w3css-bottom-region__inner, .w3css-footer-region__inner) :is(h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a) {
   color: var(--anhur-heading);
 }
 
-/* Footer: plain menu text takes the footer colour; search form border 5.56:1. */
+/* Footer: plain menu text takes the footer color; search form border 5.56:1. */
 .w3css-scheme-w3-theme-00014 .w3css-footer-menu {
   --w-fm-inner-f-v: var(--anhur-footer-field-border);
 }
@@ -156,24 +149,27 @@
  */
 .search-slide-wrapper {
   --anhur-search-z: 9999;
-  --anhur-search-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  --anhur-search-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0, 0, 0, 0.12);
+
   position: fixed;
+  z-index: var(--anhur-search-z);
+  transform: translateY(-100%);
+  opacity: 0;
+  box-shadow: var(--anhur-search-shadow);
   inset-block-start: 0;
   inset-inline: 0;
-  z-index: var(--anhur-search-z);
-  box-shadow: var(--anhur-search-shadow);
-  opacity: 0;
-  transform: translateY(-100%);
 }
 
 .search-slide-wrapper.anhur-is-open {
-  opacity: 1;
   transform: none;
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .search-slide-wrapper {
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transition:
+      transform 0.3s ease-out,
+      opacity 0.3s ease-out;
   }
 }
 
@@ -226,8 +222,8 @@
 }
 
 .search-slide-wrapper .close-search {
-  flex: 0 0 auto;
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
 }
