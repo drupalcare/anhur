@@ -1,236 +1,399 @@
-/*
- * anhur chrome and layout: fixed left sidebar at 993px and up, collapsing
- * below. Color fixes follow planning/subthemes-a11y-audit.md (the schemes in
- * D8W3CSS stay untouched; the fixes live here).
+/**
+ * @file
+ * anhur: sticky top navigation, header and color fixes on top of the W3CSS
+ * Theme and its color scheme.
+ *
+ * Layers (order: the W3CSS Theme's w3css-layers.css; check: scripts/css-layers-check.py):
+ *   w3css.tokens    every color value of this file, as --anhur-* custom properties
+ *   w3css.base      the keyboard focus ring for links, buttons and fields
+ *   w3css.locked    the !important rules (accessibility, and the color fix that
+ *                   must beat the scheme's own !important rule)
+ *   w3css.subtheme  everything else
  */
-:root {
-  --anhur-sidebar-width: 250px;
-  --anhur-control-size: 50px;
-  --anhur-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0, 0, 0, 0.12);
-}
 
-/* Color values: made for anhur's own scheme, so they apply only while that
-   scheme is active. D8W3CSS names the active scheme in a body class; with any
-   other scheme, that scheme's own colors are left untouched. */
-.w3css-scheme-w3-theme-00014 {
-  --anhur-heading: #2e6f9f;
-  --anhur-focus-border: #2e6f9f;
-  --anhur-footer-field-border: 1px solid #7a8f9a;
-}
-
-/* Layout box: sidebar column and page column (the sidebar itself is fixed). */
-.anhur-layout.w3-content {
-  max-inline-size: 1600px;
-}
-
-/* w3-clear prints table pseudo-elements that would become grid items. */
-.anhur-layout::before,
-.anhur-layout::after,
-.anhur-layout .w3css-header__inner::before,
-.anhur-layout .w3css-header__inner::after {
-  content: none;
-}
-
-/* The ids match the specificity of the base rules these override. */
-.anhur-layout #w3css-main-nav-vertical {
-  z-index: 99;
-}
-
-/* Header: side menu opener, branding, search opener. */
-.w3css-page-wrapper > header {
-  z-index: 97;
-}
-
-.anhur-layout .w3css-header__inner {
-  display: grid;
-  grid-template-columns:
-    minmax(var(--anhur-control-size), auto)
-    minmax(0, 1fr)
-    minmax(var(--anhur-control-size), auto);
-  align-items: center;
-}
-
-.anhur-layout .w3css-header__inner > * {
-  grid-column: 2;
-  text-align: center;
-}
-
-.anhur-layout :is(.w3css-main-nav__open, .open-search) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  min-inline-size: var(--anhur-control-size);
-  min-block-size: var(--anhur-control-size);
-}
-
-.anhur-layout .w3css-main-nav__open {
-  grid-row: 1;
-  grid-column: 1;
-  justify-self: start;
-}
-
-.anhur-layout .open-search {
-  grid-row: 1;
-  grid-column: 3;
-  justify-self: end;
-}
-
-.w3-sticky {
-  box-shadow: var(--anhur-shadow);
-}
-
-/* Keyboard focus: the same ring as the base theme (base.css), kept here so
-   the sub-theme does not depend on the base theme version. */
-:where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-
-/* Field focus border: 5.40:1 on #fff, 5.01:1 on #f2f7fb (was 1.76:1). */
-.w3css-scheme-w3-theme-00014 :is(input, select, textarea):focus {
-  border-color: var(--anhur-focus-border);
-}
-
-/* One accessible heading color in the page regions (header headings inherit). */
-.w3css-scheme-w3-theme-00014 :is(.w3css-welcome-text__inner, .w3css-highlighted__inner, .w3css-top-region__inner, .w3css-page-title__inner, .w3css-main-region__inner, .w3css-bottom-region__inner, .w3css-footer-region__inner) :is(h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a) {
-  color: var(--anhur-heading);
-}
-
-/* Footer: plain menu text takes the footer color; search form border 5.56:1. */
-.w3css-scheme-w3-theme-00014 .w3css-footer-menu {
-  --w-fm-inner-f-v: var(--anhur-footer-field-border);
-}
-
-.w3css-scheme-w3-theme-00014 .w3css-footer-menu .w3css-menu__list--menu-footer {
-  color: inherit;
-}
-
-/* Below 993px the header sticks and the base JS opens the side menu. */
-@media (max-width: 992px) {
-  .w3css-page-wrapper > header {
-    position: sticky;
-    inset-block-start: 0;
-    inline-size: 100%;
-  }
-}
-
-@media (min-width: 993px) {
-  .anhur-layout {
-    display: grid;
-    grid-template-columns: var(--anhur-sidebar-width) minmax(0, 1fr);
+@layer w3css.tokens {
+  :root {
+    --anhur-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0, 0, 0, 0.12);
+    --anhur-search-button-text: #fff;
   }
 
-  .anhur-layout > .w3css-page-wrapper {
-    grid-column: 2;
+  .w3css-scheme-w3-theme-00014 {
+    --anhur-heading: #2e6f9f;
+    --anhur-focus-border: #2e6f9f;
+    --anhur-footer-field-border: 1px solid #7a8f9a;
   }
 
-  /*
-   * The base JS writes an inline display on the side menu when it is opened or
-   * closed below 993px. Only !important beats an inline style, so a menu
-   * closed on a small screen still shows after a resize to desktop.
-   * The base sets width: auto !important, so the width is held by max-inline-size.
-   */
-  .anhur-layout #w3css-main-nav-vertical {
-    display: block !important;
-    max-inline-size: var(--anhur-sidebar-width);
-  }
-
-  .anhur-layout #w3css-main-nav-vertical #w3css-main-nav-close,
-  .anhur-layout .w3css-main-nav__open {
-    display: none;
-  }
-}
-
-/* search-slide:start
- * Shared by amun, amunet and anhur; keep the three identical
- * (planning/scripts/check-search-slide-drift.py in the lane root).
- * js/anhur-script.js sets anhur-is-open and inert on the panel.
- */
-.search-slide-wrapper {
-  --anhur-search-z: 9999;
-  --anhur-search-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0, 0, 0, 0.12);
-
-  position: fixed;
-  z-index: var(--anhur-search-z);
-  transform: translateY(-100%);
-  opacity: 0;
-  box-shadow: var(--anhur-search-shadow);
-  inset-block-start: 0;
-  inset-inline: 0;
-}
-
-.search-slide-wrapper.anhur-is-open {
-  transform: none;
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: no-preference) {
   .search-slide-wrapper {
-    transition:
-      transform 0.3s ease-out,
-      opacity 0.3s ease-out;
+    --anhur-search-shadow: 0 2px 5px 0 rgb(0, 0, 0, 0.16), 0 2px 10px 0 rgb(0, 0, 0, 0.12);
   }
 }
 
-.search-slide-wrapper .search-slide-inner {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-block: 1.5rem;
-  padding-inline: 1rem;
+@layer w3css.subtheme {
+  :root {
+
+    --anhur-sidebar-width: 250px;
+    --anhur-control-size: 50px;
+
+  }
 }
 
-.search-slide-wrapper .search-slide-inner > :not(.close-search) {
-  flex: 1 1 auto;
-  min-inline-size: 0;
+@layer w3css.base {
+  /* Keyboard focus: the same ring as the base theme (base.css), kept here so
+     the sub-theme does not depend on the base theme version. */
+  :where(a, button, input, select, textarea, summary, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
 }
 
-.search-slide-wrapper .w3-search-block-form {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+@layer w3css.locked {
+  @media (min-width: 62rem) {
+    .anhur-layout {
+      display: grid;
+      grid-template-columns: var(--anhur-sidebar-width) minmax(0, 1fr);
+    }
+
+    .anhur-layout > .w3css-page-wrapper {
+      grid-column: 2;
+    }
+
+    /*
+     * The base JS writes an inline display on the side menu when it is opened or
+     * closed below 993px. Only !important beats an inline style, so a menu
+     * closed on a small screen still shows after a resize to desktop.
+     * The base sets width: auto !important, so the width is held by max-inline-size.
+     */
+    .anhur-layout #w3css-main-nav-vertical {
+      display: block !important;
+      max-inline-size: var(--anhur-sidebar-width);
+    }
+
+    /* The column scrolls when its blocks are taller than the window; a thin bar in the column's own text color
+       (translucent) instead of the browser's grey one. */
+    .anhur-layout #w3css-main-nav-vertical {
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in srgb, currentcolor 40%, transparent) transparent;
+    }
+
+    .anhur-layout #w3css-main-nav-vertical #w3css-main-nav-close,
+    .anhur-layout .w3css-main-nav__open {
+      display: none;
+    }
+  }
 }
 
-.search-slide-wrapper .search-slide-inner::before,
-.search-slide-wrapper .search-slide-inner::after,
-.search-slide-wrapper .w3-search-block-form::before,
-.search-slide-wrapper .w3-search-block-form::after {
-  content: none;
-}
+@layer w3css.subtheme {
+  /* Layout box: sidebar column and page column (the sidebar itself is fixed). */
+  .anhur-layout.w3-content {
+    max-inline-size: 1600px;
+  }
 
-.search-slide-wrapper .w3-search-block-form .form-item,
-.search-slide-wrapper .w3-search-block-form .w3css-form-item {
-  position: relative;
-  flex: 1 1 auto;
-  inline-size: auto;
-  min-inline-size: 0;
-  padding: 0;
-}
+  /* w3-clear prints table pseudo-elements that would become grid items. */
+  .anhur-layout::before,
+  .anhur-layout::after,
+  .anhur-layout .w3css-header__inner::before,
+  .anhur-layout .w3css-header__inner::after {
+    content: none;
+  }
 
-.search-slide-wrapper .w3-search-block-form .form-actions {
-  flex: 0 0 auto;
-  inline-size: auto;
-  min-inline-size: 3rem;
-  padding: 0;
-}
+  /* The ids match the specificity of the base rules these override. */
+  .anhur-layout #w3css-main-nav-vertical {
+    z-index: 99;
+  }
 
-.search-slide-wrapper .w3-search-block-form .form-type-search::before {
-  inset-block-start: 50%;
-  inset-inline: 8px auto;
-  transform: translateY(-50%);
-}
+  /* Header: side menu opener, branding, search opener. */
+  .w3css-page-wrapper > header {
+    z-index: 97;
+  }
 
-.search-slide-wrapper .close-search {
-  display: inline-flex;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-}
+  .anhur-layout .w3css-header__inner {
+    display: grid;
+    grid-template-columns:
+      minmax(var(--anhur-control-size), auto)
+      minmax(0, 1fr)
+      minmax(var(--anhur-control-size), auto);
+    align-items: center;
+  }
 
-.open-search:focus-visible,
-.search-slide-wrapper .close-search:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
+  .anhur-layout .w3css-header__inner > * {
+    grid-column: 2;
+    text-align: center;
+  }
+
+  /* Branding lockup: logo and site name sit side by side as one group,
+     centred on one line, the logo sized to the name instead of its
+     300px source width. */
+  .anhur-layout #w3css-header .block-system-branding-block {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0 1rem;
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  .anhur-layout #w3css-header .block-system-branding-block .site-logo {
+    float: none;
+    flex: 0 0 auto;
+    inline-size: auto;
+    max-inline-size: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .anhur-layout #w3css-header .block-system-branding-block .site-logo img {
+    inline-size: auto;
+    max-inline-size: none;
+    block-size: 3.5rem;
+  }
+
+  .anhur-layout #w3css-header .block-system-branding-block .w3css-site-name-slogan {
+    flex: 0 1 auto;
+    min-inline-size: 0;
+    margin: 0;
+    text-align: start;
+  }
+
+  .anhur-layout #w3css-header .block-system-branding-block .w3css-site-name {
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  .anhur-layout #w3css-header .block-system-branding-block .w3css-site-slogan {
+    margin: 0.125rem 0 0 0;
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 37.49875rem) {
+    .anhur-layout #w3css-header .block-system-branding-block {
+      gap: 0 0.625rem;
+    }
+
+    .anhur-layout #w3css-header .block-system-branding-block .site-logo img {
+      block-size: 1.75rem;
+    }
+
+    .anhur-layout #w3css-header .block-system-branding-block .w3css-site-slogan {
+      font-size: 0.75rem;
+      /* Wraps: on a 320 px screen a one-line slogan pushed the page 57 px wide. */
+      overflow-wrap: anywhere;
+    }
+  }
+
+  .anhur-layout :is(.w3css-main-nav__open, .open-search) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    min-inline-size: var(--anhur-control-size);
+    min-block-size: var(--anhur-control-size);
+  }
+
+  .anhur-layout .w3css-main-nav__open {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .anhur-layout .open-search {
+    grid-row: 1;
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .w3-sticky {
+    box-shadow: var(--anhur-shadow);
+  }
+
+  /* Header controls (menu opener, search opener): a short colour and opacity change on hover and focus, none for
+     reduced motion. Only colour and opacity move; the box never changes size. */
+  .anhur-layout :is(.w3css-main-nav__open, .open-search) {
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .anhur-layout :is(.w3css-main-nav__open, .open-search) {
+      transition: none;
+    }
+  }
+
+  /* From 992px the menu column is always shown, so its open and close
+     buttons are hidden. Kept after the header control rules above, which set
+     display: flex with the same specificity. Not in w3css.locked: a normal
+     declaration there is the weakest of all layers and lost to the base's
+     display: flex (measured on anhur2.test, 2026-11-11). */
+  @media (min-width: 62rem) {
+    .anhur-layout #w3css-main-nav-vertical #w3css-main-nav-close,
+    .anhur-layout .w3css-main-nav__open {
+      display: none;
+    }
+  }
+
+  /* Field focus border: 5.40:1 on #fff, 5.01:1 on #f2f7fb (was 1.76:1). */
+  .w3css-scheme-w3-theme-00014 :is(input, select, textarea):focus {
+    border-color: var(--anhur-focus-border);
+  }
+
+  /* One accessible heading color in the page regions (header headings inherit). */
+  .w3css-scheme-w3-theme-00014 :is(.w3css-welcome-text__inner, .w3css-highlighted__inner, .w3css-top-region__inner, .w3css-page-title__inner, .w3css-main-region__inner, .w3css-bottom-region__inner, .w3css-footer-region__inner) :is(h1, h2, h3, h4, h5, h6, h1 a, h2 a, h3 a, h4 a, h5 a, h6 a) {
+    color: var(--anhur-heading);
+  }
+
+  /* Footer: plain menu text takes the footer color; search form border 5.56:1. */
+  /* The W3CSS Theme paints this border from a scheme token in w3css.schemes
+     (css/predefined/w3css-scheme-custom-paint.css); this layer beats it
+     without depending on the token's name. */
+  .w3css-scheme-w3-theme-00014 #w3css-footer-menu-inner form.w3-content {
+    border: var(--anhur-footer-field-border);
+  }
+
+  .w3css-scheme-w3-theme-00014 .w3css-footer-menu .w3css-menu__list--menu-footer {
+    color: inherit;
+  }
+
+  /* Below 993px the header sticks and the base JS opens the side menu. */
+  @media (max-width: 61.99875rem) {
+    .w3css-page-wrapper > header {
+      position: sticky;
+      inset-block-start: 0;
+      inline-size: 100%;
+    }
+  }
+
+  /* search-slide:start
+   * Shared by amun, amunet and anhur; keep the three identical
+   * (planning/scripts/check-search-slide-drift.py in the lane root).
+   * js/anhur-script.js sets anhur-is-open and inert on the panel.
+   */
+  .search-slide-wrapper {
+    --anhur-search-z: 9999;
+
+    position: fixed;
+    z-index: var(--anhur-search-z);
+    transform: translateY(-100%);
+    opacity: 0;
+    box-shadow: var(--anhur-search-shadow);
+    inset-block-start: 0;
+    inset-inline: 0;
+  }
+
+  .search-slide-wrapper.anhur-is-open {
+    transform: none;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .search-slide-wrapper {
+      transition:
+        transform 0.3s ease-out,
+        opacity 0.3s ease-out;
+    }
+  }
+
+  .search-slide-wrapper .search-slide-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 1.5rem;
+    padding-inline: 1rem;
+  }
+
+  .search-slide-wrapper .search-slide-inner > :not(.close-search) {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+
+  .search-slide-wrapper .w3-search-block-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .search-slide-wrapper .search-slide-inner::before,
+  .search-slide-wrapper .search-slide-inner::after,
+  .search-slide-wrapper .w3-search-block-form::before,
+  .search-slide-wrapper .w3-search-block-form::after {
+    content: none;
+  }
+
+  .search-slide-wrapper .w3-search-block-form .form-item,
+  .search-slide-wrapper .w3-search-block-form .w3css-form-item {
+    position: relative;
+    flex: 1 1 auto;
+    inline-size: auto;
+    min-inline-size: 0;
+    padding: 0;
+  }
+
+  .search-slide-wrapper .w3-search-block-form .form-actions {
+    flex: 0 0 auto;
+    inline-size: auto;
+    min-inline-size: 3rem;
+    padding: 0;
+  }
+
+  .search-slide-wrapper .w3-search-block-form .form-type-search::before {
+    inset-block-start: 50%;
+    inset-inline: 8px auto;
+    transform: translateY(-50%);
+  }
+
+  .search-slide-wrapper .close-search {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .open-search:focus-visible,
+  .search-slide-wrapper .close-search:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  /* Polish: the form is one centred row (input, search button, close) no wider
+     than a reading line, a tall input with a visible border, and a filled
+     search button in the panel's own text colour. */
+  .search-slide-wrapper .search-slide-inner {
+    max-inline-size: 64rem;
+    margin: 0 auto;
+  }
+
+  .search-slide-wrapper .w3-search-block-form input[type="search"] {
+    box-sizing: border-box;
+    block-size: 3rem;
+    margin: 0;
+    padding: 0 1rem;
+    border: 1px solid color-mix(in srgb, currentcolor 35%, transparent);
+    border-radius: 0.25rem;
+    font-size: 1rem;
+  }
+
+  .search-slide-wrapper .w3-search-block-form .form-actions {
+    border-radius: 0.25rem;
+    background-color: currentcolor;
+  }
+
+  .search-slide-wrapper .w3-search-block-form .form-actions :is(input, button) {
+    box-sizing: border-box;
+    block-size: 3rem;
+    margin: 0;
+    padding: 0 1.25rem;
+    border: 0;
+    border-radius: 0.25rem;
+    color: var(--anhur-search-button-text);
+    background-color: transparent;
+    font-weight: 600;
+  }
+
+  .search-slide-wrapper .close-search {
+    inline-size: 3rem;
+    block-size: 3rem;
+    padding: 0;
+  }
+  /* search-slide:end */
 }
-/* search-slide:end */

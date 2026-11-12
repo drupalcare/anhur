@@ -1,1 +1,14 @@
-/* Add your css code here */
+/**
+ * @file
+ * Starter styles for a sub-theme of Anhur, written in CSS layers.
+ *
+ * The layer order is owned by the W3CSS Theme (css/base/w3css-layers.css,
+ * loaded first on every page); do not declare it here. Anhur's own rules are
+ * in w3css.subtheme, so put yours in w3css.custom, the one layer after it:
+ * your rules then beat Anhur and the W3CSS Theme whatever the selector
+ * specificity. Keep color values in custom properties.
+ */
+
+@layer w3css.custom {
+  /* Example (delete): .w3css-page-wrapper { --my-gap: 1rem; } */
+}

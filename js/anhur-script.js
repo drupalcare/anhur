@@ -119,4 +119,18 @@
       });
     },
   };
+
+  // Deprecated in 3.0, removed in the next major: the 2.x behavior
+  // name anhurThemeBehavior reads and writes
+  // Drupal.behaviors.anhurSearchSlide. It is not enumerable, so
+  // Drupal.attachBehaviors() runs the behavior once.
+  if (!Object.hasOwn(Drupal.behaviors, 'anhurThemeBehavior')) {
+    Object.defineProperty(Drupal.behaviors, 'anhurThemeBehavior', {
+      configurable: true,
+      get: () => Drupal.behaviors.anhurSearchSlide,
+      set: (value) => {
+        Drupal.behaviors.anhurSearchSlide = value;
+      },
+    });
+  }
 })(Drupal, once);
