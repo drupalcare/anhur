@@ -30,10 +30,8 @@
 
 @layer w3css.subtheme {
   :root {
-
     --anhur-sidebar-width: 250px;
     --anhur-control-size: 50px;
-
   }
 }
 
@@ -72,7 +70,7 @@
        (translucent) instead of the browser's grey one. */
     .anhur-layout #w3css-main-nav-vertical {
       scrollbar-width: thin;
-      scrollbar-color: color-mix(in srgb, currentcolor 40%, transparent) transparent;
+      scrollbar-color: color-mix(in sRGB, currentColor 40%, transparent) transparent;
     }
 
     .anhur-layout #w3css-main-nav-vertical #w3css-main-nav-close,
@@ -368,26 +366,26 @@
     block-size: 3rem;
     margin: 0;
     padding: 0 1rem;
-    border: 1px solid color-mix(in srgb, currentcolor 35%, transparent);
+    border: 1px solid color-mix(in sRGB, currentColor 35%, transparent);
     border-radius: 0.25rem;
     font-size: 1rem;
   }
 
   .search-slide-wrapper .w3-search-block-form .form-actions {
     border-radius: 0.25rem;
-    background-color: currentcolor;
+    background-color: currentColor;
   }
 
   .search-slide-wrapper .w3-search-block-form .form-actions :is(input, button) {
     box-sizing: border-box;
-    block-size: 3rem;
     margin: 0;
     padding: 0 1.25rem;
+    color: var(--anhur-search-button-text);
     border: 0;
     border-radius: 0.25rem;
-    color: var(--anhur-search-button-text);
     background-color: transparent;
     font-weight: 600;
+    block-size: 3rem;
   }
 
   .search-slide-wrapper .close-search {
