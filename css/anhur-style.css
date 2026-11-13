@@ -179,6 +179,7 @@
     }
   }
 
+  /* stylelint-disable-next-line order/order -- this nested rule stays after the @media block; moving it changes which rule wins */
   .anhur-layout :is(.w3css-main-nav__open, .open-search) {
     display: flex;
     align-items: center;
@@ -232,6 +233,7 @@
   }
 
   /* Field focus border: 5.40:1 on #fff, 5.01:1 on #f2f7fb (was 1.76:1). */
+  /* stylelint-disable-next-line order/order -- this nested rule stays after the @media block; moving it changes which rule wins */
   .w3css-scheme-w3-theme-00014 :is(input, select, textarea):focus {
     border-color: var(--anhur-focus-border);
   }
@@ -267,6 +269,7 @@
    * (planning/scripts/check-search-slide-drift.py in the lane root).
    * js/anhur-script.js sets anhur-is-open and inert on the panel.
    */
+  /* stylelint-disable-next-line order/order -- this nested rule stays after the @media block; moving it changes which rule wins */
   .search-slide-wrapper {
     --anhur-search-z: 9999;
 
@@ -292,6 +295,7 @@
     }
   }
 
+  /* stylelint-disable-next-line order/order -- this nested rule stays after the @media block; moving it changes which rule wins */
   .search-slide-wrapper .search-slide-inner {
     display: flex;
     align-items: center;
