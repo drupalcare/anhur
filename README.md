@@ -20,7 +20,7 @@ page. On narrow screens the menu is hidden and a button in the header opens it.
 
 1. Install W3CSS Theme 3.0 (for example `composer require drupal/d8w3css`).
 1. Install Anhur into `themes/contrib`, for example
-   `composer require drupal/anhur`.
+   `composer require drupal/anhur-anhur`.
 1. Go to Appearance (`/admin/appearance`) and scroll to "Anhur".
 1. Click "Install and set as default".
 
